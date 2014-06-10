@@ -1,0 +1,19 @@
+Parker Stebbins/ 6.9.2014
+
+Define four vertices of a rectangle (q++, q+-, q--, q-+);
+Define the focal point (fp);
+Define the normal vector of the light source (nl);
+For all rows in pixels, define py:
+	For all columns in pixels, define px:
+		Find the point: {
+			q-+.x + (x distance between q++ and q-+) / (screen width) * px,
+			q--.y + (y distance between q+- and q--) / (screen height) * py
+		}: This is the position vector of the pixel on the viewport plane. Define as rv;
+		Find the normal vector between the pixel and the focal point with (fp - pv) / (fp - pv).magnitude.  Define rn;
+		Run raycast for surface planes {attitude rn,  origin rv};
+		If no surface intersects with the ray:
+			Define b : 0;
+		Else:
+			(Find the normal vector of the surface at the point of intersection) Define ns : cross(blah);
+			(Brightness of the surface) Define b : 2*pi / (angle between ns and nl)
+		Render the pixel with brightness b
